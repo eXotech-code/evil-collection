@@ -221,7 +221,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 ;; If more than one char is selected, replace the whole selection
 ;; with the char typed in after pushing the "r" key.
 (evil-define-operator evil-collection-vterm-replace (beg end type)
-  (interactive "<R><r>")
   (cond
   ((eq type 'block)
    (message "Used replacement for block \"%s\"." (filter-buffer-substring beg end)))
