@@ -106,7 +106,6 @@ after the prompt."
 
 (defun evil-collection-vterm-paste-after (&optional arg)
   (interactive "P")
-  (prin1 "TEST!")
   (vterm-goto-char (+ 1 (point)))
   (call-interactively #'vterm-yank arg))
 
@@ -117,6 +116,7 @@ after the prompt."
 Delete text from BEG to END with TYPE.
 Save in REGISTER or in the kill-ring with YANK-HANDLER."
   (interactive "<R><x><y>")
+  (prin1 "TEST!")
   (let* ((beg (max (or beg (point)) (vterm--get-prompt-point)))
          (end (min (or end beg) (vterm--get-end-of-line))))
     (unless register
