@@ -213,6 +213,14 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   (interactive "<r><x>")
   (evil-collection-vterm-change beg end 'line register yank-handler))
 
+;; This emulates replace mode.
+;; If more than one char is selected, replace the whole selection
+;; with the char typed in after pushing the "r" key.
+(evil-define-operator evil-collection-vterm-replace (beg end)
+  (interactive "r")
+  (let ((text (filter-buffer-substring beg end)))
+    (prin1 text))
+
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
 But don't allow the cursor to move bellow the last prompt line."
