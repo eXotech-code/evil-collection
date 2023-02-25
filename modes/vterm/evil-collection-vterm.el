@@ -213,11 +213,20 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   (interactive "<r><x>")
   (evil-collection-vterm-change beg end 'line register yank-handler))
 
+(evil-define-operator evil-collection-vterm-replace-char :motion evil-forward-char (beg end)
+  (message "Used replacement of char '%s'." (filter-buffer-substring beg end)))
+
 ;; This emulates replace mode.
 ;; If more than one char is selected, replace the whole selection
 ;; with the char typed in after pushing the "r" key.
 (evil-define-operator evil-collection-vterm-replace (beg end type)
-  (message "type: %s, value: %s, beg: %s, end: %s" (eq type 'line) (filter-buffer-substring beg end) beg end))
+  (cond
+  ((eq type 'block)
+   (message "Used replacement for block \"%s\"." (filter-buffer-substring beg end)))
+  ((eq type 'line)
+   (message "Used replacement for line \"%s\"" (filter-buffer-substring beg end)))
+  (t
+   (evil-collection-vterm-replace-char beg end))))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
