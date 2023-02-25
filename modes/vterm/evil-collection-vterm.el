@@ -217,7 +217,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 ;; If more than one char is selected, replace the whole selection
 ;; with the char typed in after pushing the "r" key.
 (evil-define-operator evil-collection-vterm-replace (beg end type)
-  (message "type: %s, value: %s" (filter-buffer-substring beg end) (type 'line)))
+  (message "type: %s, value: %s" (filter-buffer-substring beg end) (eq type 'line)))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
