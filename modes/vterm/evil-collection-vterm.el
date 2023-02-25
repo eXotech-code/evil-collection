@@ -213,7 +213,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   (interactive "<r><x>")
   (evil-collection-vterm-change beg end 'line register yank-handler))
 
-(evil-define-operator evil-collection-vterm-replace-char :motion evil-forward-char (beg end)
+(evil-define-operator evil-collection-vterm-replace-char (beg end)
+  :motion evil-forward-char
   (message "Used replacement of char '%s'." (filter-buffer-substring beg end)))
 
 ;; This emulates replace mode.
