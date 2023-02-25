@@ -106,6 +106,7 @@ after the prompt."
 
 (defun evil-collection-vterm-paste-after (&optional arg)
   (interactive "P")
+  (prin1 "TEST!")
   (vterm-goto-char (+ 1 (point)))
   (call-interactively #'vterm-yank arg))
 
