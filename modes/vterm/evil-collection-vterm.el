@@ -111,37 +111,37 @@ after the prompt."
 
 (declare-function vterm-reset-cursor-point "vterm")
 
-(evil-define-operator evil-collection-vterm-delete (beg end type register yank-handler)
-  "Modification of evil-delete to work in vterm buffer.
-Delete text from BEG to END with TYPE.
-Save in REGISTER or in the kill-ring with YANK-HANDLER."
-  (interactive "<R><x><y>")
-  (prin1 "TEST!")
-  (let* ((beg (max (or beg (point)) (vterm--get-prompt-point)))
-         (end (min (or end beg) (vterm--get-end-of-line))))
-    (unless register
-      (let ((text (filter-buffer-substring beg end)))
-        (unless (string-match-p "\n" text)
-          ;; set the small delete register
-          (evil-set-register ?- text))))
-    (let ((evil-was-yanked-without-register nil))
-      (evil-yank beg end type register yank-handler))
-    (cond
-     ((eq type 'block)
-      (evil-apply-on-block #'vterm-delete-region beg end nil))
-     ((and (eq type 'line)
-           (= end (point-max))
-           (or (= beg end)
-               (/= (char-before end) ?\n))
-           (/= beg (point-min))
-           (=  (char-before beg) ?\n))
-      (vterm-delete-region (1- beg) end))
-     (t
-      (vterm-delete-region beg end)))
-    ;; place cursor on beginning of line
-    (when (and (called-interactively-p 'any)
-               (eq type 'line))
-      (vterm-reset-cursor-point))))
+;; (evil-define-operator evil-collection-vterm-delete (beg end type register yank-handler)
+;;   "Modification of evil-delete to work in vterm buffer.
+;; Delete text from BEG to END with TYPE.
+;; Save in REGISTER or in the kill-ring with YANK-HANDLER."
+;;   (interactive "<R><x><y>")
+;;   (prin1 "TEST!")
+;;   (let* ((beg (max (or beg (point)) (vterm--get-prompt-point)))
+;;          (end (min (or end beg) (vterm--get-end-of-line))))
+;;     (unless register
+;;       (let ((text (filter-buffer-substring beg end)))
+;;         (unless (string-match-p "\n" text)
+;;           ;; set the small delete register
+;;           (evil-set-register ?- text))))
+;;     (let ((evil-was-yanked-without-register nil))
+;;       (evil-yank beg end type register yank-handler))
+;;     (cond
+;;      ((eq type 'block)
+;;       (evil-apply-on-block #'vterm-delete-region beg end nil))
+;;      ((and (eq type 'line)
+;;            (= end (point-max))
+;;            (or (= beg end)
+;;                (/= (char-before end) ?\n))
+;;            (/= beg (point-min))
+;;            (=  (char-before beg) ?\n))
+;;       (vterm-delete-region (1- beg) end))
+;;      (t
+;;       (vterm-delete-region beg end)))
+;;     ;; place cursor on beginning of line
+;;     (when (and (called-interactively-p 'any)
+;;                (eq type 'line))
+;;       (vterm-reset-cursor-point))))
 
 (evil-define-operator evil-collection-vterm-delete-backward-char (beg end type register)
   "Delete previous character."
