@@ -219,8 +219,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 ;; This emulates replace mode.
 ;; If more than one char is selected, replace the whole selection
 ;; with the char typed in after pushing the "r" key.
-(evil-define-operator evil-collection-vterm-replace (beg end type
-  :motion evil-forward-char)
+(evil-define-operator evil-collection-vterm-replace (beg end type)
+  :type block
+  :motion evil-forward-char
   (cond
   ((eq type 'block)
    (message "Used replacement for block \"%s\"." (filter-buffer-substring beg end)))
