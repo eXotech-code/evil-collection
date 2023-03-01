@@ -220,11 +220,11 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 ;; This emulates replace mode.
 ;; If more than one char is selected, replace the whole selection
 ;; with the char typed in after pushing the "r" key.
-(evil-define-operator evil-collection-vterm-replace (beg end type)
+(evil-define-operator evil-collection-vterm-replace (beg end type :motion evil-forward-char)
   (cond
   ((eq type 'block)
    (message "Used replacement for block \"%s\"." (filter-buffer-substring beg end)))
-  ((eq type 'line)
+  ((eq type 'line) ;; This gets launched also for double press of "r". This shouldn't be the case.
    (message "Used replacement for line \"%s\"" (filter-buffer-substring beg end)))
   (t
    (evil-collection-vterm-replace-char beg end))))
