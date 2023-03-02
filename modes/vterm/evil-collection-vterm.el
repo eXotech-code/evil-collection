@@ -226,7 +226,12 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
                      (list (evil-read-key)))
                  (evil-refresh-cursor)))
   (when char
-    (message "block = %s, line = %s, inclusive = %s, exclusive = %s" (eq type 'block) (eq type 'line) (eq type 'inclusive) (eq type 'exclusive))))
+    (while (< (point) end)
+      (if (eq (char-after) ?\n)
+          (forward-char)
+        (delete-char 1)
+        (insert-char char 1)))
+    (goto-char (max beg (1 - end)))))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
