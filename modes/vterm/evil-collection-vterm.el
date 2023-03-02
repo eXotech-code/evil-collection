@@ -229,8 +229,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (while (< (point) end)
       (if (eq (char-after) ?\n)
           (forward-char)
-        (delete-char 1)
-        (insert-char char 1)))
+        (vterm--delete-char)
+        (vterm-insert char)))
     (goto-char (max beg (1 - end)))))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
