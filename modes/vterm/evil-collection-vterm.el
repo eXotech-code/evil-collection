@@ -229,6 +229,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (while (< (point) end)
       (if (eq (char-after) ?\n)
           (forward-char)
+        (message "point %s" (point))
         (vterm-delete-region (point) (+ point 1))
         (vterm-insert char)))
     (goto-char (max beg (1 - end)))))
