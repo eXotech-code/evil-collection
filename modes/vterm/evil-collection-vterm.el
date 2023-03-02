@@ -213,10 +213,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   (interactive "<r><x>")
   (evil-collection-vterm-change beg end 'line register yank-handler))
 
-;; This emulates replace mode.
-;; If more than one char is selected, replace the whole selection
-;; with the char typed in after pushing the "r" key.
 (evil-define-operator evil-collection-vterm-replace (beg end type char)
+  "Replace selection with char (possibly repeated)."
   :motion evil-forward-char
   (interactive "<R>"
                ;; Change the cursor to replace mode an read one char from user.
@@ -229,10 +227,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (while (< (point) end)
       (if (eq (char-after) ?\n)
           (forward-char)
-        (message "point %s" (point))
         (vterm-delete-region (point) (+ (point) 1))
         (vterm-insert char)))
-    (goto-char (max beg (- 1 end)))))
+    (vterm-goto-char (max beg (- end 1)))))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
