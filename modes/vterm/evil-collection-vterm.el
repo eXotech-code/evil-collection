@@ -232,7 +232,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
         (message "point %s" (point))
         (vterm-delete-region (point) (+ (point) 1))
         (vterm-insert char)))
-    (goto-char (max beg (1 - end)))))
+    (goto-char (max beg (- 1 end)))))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
