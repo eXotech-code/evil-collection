@@ -226,7 +226,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
                      (list (evil-read-key)))
                  (evil-refresh-cursor)))
   (when char
-    (message "Is block = %d" (eq type 'block))))
+    (message "Is block = %s" (eq type 'block))))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
