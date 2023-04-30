@@ -236,7 +236,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   :tag "<R>"
   :cursor hbar
   :message "-- REPLACE ---"
-  :input-method t)
+  :input-method t
+  (message "Entered REPLACE state."))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
