@@ -217,7 +217,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   "Replace selection with char (possibly repeated)."
   :motion evil-forward-char
   (interactive "<R>"
-               ;; Change the cursor to replace mode an read one char from user.
+               ;; Change the cursor to replace mode and read one char from user.
                (unwind-protect
                    (let ((evil-force-cursor 'replace))
                      (evil-refresh-cursor)
@@ -230,6 +230,11 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
         (vterm-delete-region (point) (+ (point) 1))
         (vterm-insert char)))
     (vterm-goto-char (max beg (- end 1)))))
+
+(defun evil-collection-vterm-replace-interactive ()
+  "Continuously replace chars in line."
+  (interactive)
+  (call-interactively #'evil-replace))
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
@@ -297,6 +302,7 @@ But don't allow the cursor to move bellow the last prompt line."
     "s" 'evil-collection-vterm-substitute
     "S" 'evil-collection-vterm-substitute-line
     "r" 'evil-collection-vterm-replace
+    "R" 'evil-collection-vterm-replace-interactive
     "j" 'evil-collection-vterm-next-line
     "G" 'vterm-reset-cursor-point)
 
