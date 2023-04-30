@@ -231,10 +231,12 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
         (vterm-insert char)))
     (vterm-goto-char (max beg (- end 1)))))
 
-(defun evil-collection-vterm-replace-interactive ()
-  "Continuously replace chars in line."
-  (interactive)
-  (call-interactively #'evil-replace))
+(evil-define-state evil-collection-vterm-replace-interactive
+  "Replace state"
+  :tag "<R>"
+  :cursor hbar
+  :message "-- REPLACE ---"
+  :input-method t)
 
 (evil-define-motion evil-collection-vterm-next-line (count)
   "Move the cursor COUNT lines down.
