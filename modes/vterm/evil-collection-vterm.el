@@ -304,7 +304,7 @@ But don't allow the cursor to move bellow the last prompt line."
     "s" 'evil-collection-vterm-substitute
     "S" 'evil-collection-vterm-substitute-line
     "r" 'evil-collection-vterm-replace
-    "R" 'evil-collection-vterm-replace-interactive
+    ;; "R" 'evil-collection-vterm-replace-interactive
     "j" 'evil-collection-vterm-next-line
     "G" 'vterm-reset-cursor-point)
 
